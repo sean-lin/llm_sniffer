@@ -4,10 +4,10 @@ LISTEN_HOST = "0.0.0.0"
 LISTEN_PORT = 8080
 
 # Backend LLM server (OpenAI-compatible endpoint)
-REMOTE_URL = "https://api.openai.com"
+REMOTE_URL = "https://idealab.alibaba-inc.com/api/openai"
 
 # API key to use when forwarding to backend
-BACKEND_API_KEY = "sk-xxx"
+BACKEND_API_KEY = "ff3d672e4c65f6526816cfbdcd338bdf"
 
 # API keys accepted from clients (empty list = accept any)
 ACCEPTED_API_KEYS = []

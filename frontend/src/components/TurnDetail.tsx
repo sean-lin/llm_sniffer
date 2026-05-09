@@ -1,6 +1,7 @@
 import type { RequestDetail, Message } from '../types';
 import MessageBubble from './MessageBubble';
 import ToolUseDisplay from './ToolUseDisplay';
+import ToolsTableDisplay from './ToolsTableDisplay';
 import MediaDisplay from './MediaDisplay';
 
 interface Props {
@@ -25,8 +26,16 @@ export default function TurnDetail({ detail, onBack }: Props) {
         <span className="timestamp">{new Date(detail.timestamp).toLocaleString()}</span>
       </div>
 
+      <div className="turn-detail-body">
       {detail.error && (
         <div className="error-banner">Error: {detail.error}</div>
+      )}
+
+      {detail.request_body?.tools && detail.request_body.tools.length > 0 && (
+        <details className="tools-collapsible">
+          <summary>Available Tools ({detail.request_body.tools.length})</summary>
+          <ToolsTableDisplay tools={detail.request_body.tools} />
+        </details>
       )}
 
       <div className="messages-section">
@@ -61,6 +70,7 @@ export default function TurnDetail({ detail, onBack }: Props) {
         <summary>Raw Response JSON</summary>
         <pre>{JSON.stringify(detail.response_body, null, 2)}</pre>
       </details>
+      </div>
     </div>
   );
 }

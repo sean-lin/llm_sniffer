@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { ToolCall } from '../types';
 
 interface Props {
@@ -5,6 +6,8 @@ interface Props {
 }
 
 export default function ToolUseDisplay({ toolCalls }: Props) {
+  const [expandedContent, setExpandedContent] = useState<{ title: string; content: string } | null>(null);
+
   return (
     <div className="tool-use-display">
       <h4>Tool Calls</h4>
@@ -15,6 +18,7 @@ export default function ToolUseDisplay({ toolCalls }: Props) {
         } catch {
           parsedArgs = tc.function.arguments;
         }
+        const argsStr = typeof parsedArgs === 'string' ? parsedArgs : JSON.stringify(parsedArgs, null, 2);
 
         return (
           <div key={i} className="tool-call-card">
@@ -24,11 +28,30 @@ export default function ToolUseDisplay({ toolCalls }: Props) {
             </div>
             <div className="tool-call-args">
               <span className="label">Arguments:</span>
-              <pre>{typeof parsedArgs === 'string' ? parsedArgs : JSON.stringify(parsedArgs, null, 2)}</pre>
+              <pre
+                className="tool-content-truncated"
+                onClick={() => setExpandedContent({ title: `${tc.function.name} - Arguments`, content: argsStr })}
+              >
+                {argsStr}
+              </pre>
             </div>
           </div>
         );
       })}
+
+      {expandedContent && (
+        <div className="tool-popover-overlay" onClick={() => setExpandedContent(null)}>
+          <div className="tool-popover" onClick={e => e.stopPropagation()}>
+            <div className="tool-popover-header">
+              <span className="tool-popover-name">{expandedContent.title}</span>
+              <button className="tool-popover-close" onClick={() => setExpandedContent(null)}>&times;</button>
+            </div>
+            <div className="tool-popover-body">
+              <pre className="tool-popover-pre">{expandedContent.content}</pre>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
