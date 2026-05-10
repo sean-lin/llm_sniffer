@@ -17,6 +17,7 @@ export interface RequestSummary {
   duration_ms: number;
   stream: boolean;
   error: string | null;
+  user_agent: string | null;
 }
 
 export interface RequestDetail extends RequestSummary {
@@ -38,6 +39,7 @@ export interface Message {
   content: string | ContentBlock[];
   tool_calls?: ToolCall[];
   tool_call_id?: string;
+  reasoning_content?: string;
 }
 
 export interface ContentBlock {

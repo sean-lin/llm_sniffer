@@ -57,6 +57,7 @@ export default function App() {
         ) : selectedSession ? (
           <ConversationView
             requests={requests}
+            sessionId={selectedSession}
             onSelectRequest={handleSelectRequest}
           />
         ) : (

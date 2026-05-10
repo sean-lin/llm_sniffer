@@ -232,18 +232,61 @@ body {
 }
 
 .turn-user-msg {
-  color: var(--text-primary);
+  color: #81d4fa;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-left: 3px solid #4fc3f7;
+  padding-left: 8px;
 }
 
 .turn-assistant-msg {
-  color: var(--text-secondary);
+  color: #a5d6a7;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 4px;
+  border-left: 3px solid #66bb6a;
+  padding-left: 8px;
+}
+
+.session-meta-bar {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.session-meta-bar code {
+  background: var(--bg-secondary);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--accent);
+}
+
+.turn-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.turn-meta .meta-item {
+  background: var(--bg-primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.turn-meta .token-usage {
+  color: #ce93d8;
+  border-color: #4a3a5a;
 }
 
 /* Turn Detail */
@@ -828,6 +871,34 @@ body {
   padding: 8px;
   border-radius: 4px;
   margin: 4px 0;
+}
+
+/* Thinking / Reasoning */
+.thinking-block {
+  margin: 4px 0 8px;
+  border: 1px solid #4a3a2a;
+  border-radius: var(--radius);
+  background: rgba(255, 167, 38, 0.05);
+}
+
+.thinking-block summary {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-orange);
+  padding: 6px 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.thinking-text {
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 10px;
+  color: #c8b898;
+  line-height: 1.5;
+  border-top: 1px solid #4a3a2a;
 }
 
 /* Scrollbar */

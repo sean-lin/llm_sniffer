@@ -18,6 +18,7 @@ SESSION_TIMEOUT = 1800
 # Database and media storage paths
 DB_PATH = "logs/sniffer.db"
 MEDIA_DIR = "logs/media"
+ERROR_LOG_PATH = "logs/error.log"
 
 # Frontend static files directory
 STATIC_DIR = "static"

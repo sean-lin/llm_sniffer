@@ -31,13 +31,31 @@ export default function MessageBubble({ message }: Props) {
   }
 
   if (typeof content === 'string') {
-    return <div className="message-content"><pre className="message-text">{content}</pre></div>;
+    return (
+      <div className="message-content">
+        {message.reasoning_content && (
+          <details className="thinking-block">
+            <summary>Thinking</summary>
+            <pre className="thinking-text">{message.reasoning_content}</pre>
+          </details>
+        )}
+        <pre className="message-text">{content}</pre>
+      </div>
+    );
   }
 
   if (Array.isArray(content)) {
     return (
       <div className="message-content">
         {content.map((block, i) => {
+          if (block.type === 'thinking' && (block as Record<string, unknown>).thinking) {
+            return (
+              <details key={i} className="thinking-block">
+                <summary>Thinking</summary>
+                <pre className="thinking-text">{(block as Record<string, unknown>).thinking as string}</pre>
+              </details>
+            );
+          }
           if (block.type === 'text' && block.text) {
             return <pre key={i} className="message-text">{block.text}</pre>;
           }
